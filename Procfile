@@ -1,1 +1,3 @@
-web: bash _scripts/startDev.sh
+web: npm start
+
+# bash _scripts/startDev.sh
