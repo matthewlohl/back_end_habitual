@@ -54,4 +54,15 @@ async function destroy (req, res) {
   }
 }
 
-module.exports = {index, show, create, update, destroy}
+async function patch (req, res) {
+
+  try{
+    const habit = await Habit.patch()
+    res.status(200).json(habit)
+  } catch (err) {
+    res.status(500).json({err})
+  }
+}
+
+
+module.exports = {index, show, create, update, destroy, patch}
