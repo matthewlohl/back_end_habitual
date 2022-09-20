@@ -11,9 +11,9 @@ const habitsRoutes = require ('./routes/habits')
 
 server.use('/habits', habitsRoutes)
 
-//const userRoutes = require ('./routers/users')
+const userRoutes = require ('./routes/users')
 
-// server.use('/users', userRoutes)
+server.use('/users', userRoutes)
 
 
 server.get('/', (req,res) => res.send('Welcome to Habits'))

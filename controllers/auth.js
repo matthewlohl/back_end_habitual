@@ -10,19 +10,32 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
-router.post('/register', async (req, res) => {
+async function index (req,res) {
+    try{
+        console.log('getting users - line 15')
+        const users = await User.all
+        res.json({users})
+    } catch (err){
+        res.status(500).json({err})
+    }
+}
+
+async function register (req, res) {
     try {
-      const hashedPassword = await bcrypt.hash(req.body.password, 10)
-      await User.create({...req.body, password: hashedPassword})
-      res.status(201).send({msg: 'User created'})
+        console.log('grabbing username and pw')
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        console.log('hashing and salting pw')
+        await User.create({...req.body, password: hashedPassword})
+        console.log('running register function - line 27')
+        res.status(201).send({msg: 'User created'})
     } catch (err) {
       res.status(500).send(`Error: ${err}`)
     }
-  })
+  }
 
-router.post('/login', async (req, res) => {
-   
+async function login (req, res) {
     try {
+        console.log('Running login function- line 36')
       const user = await User.findByEmail(req.body.email)
       console.log(user)
       console.log(`request: ${req.body.email}`)
@@ -35,7 +48,7 @@ router.post('/login', async (req, res) => {
         console.log('Success')
 
         if (!!authed){
-            const payload = { username: user.username, email: user.email }
+            const payload = { username: user.user_name, email: user.email }
             const sendToken = (err, token) => {
                 if(err){ throw new Error('Error in token generation') }
                 res.status(200).json({
@@ -53,7 +66,7 @@ router.post('/login', async (req, res) => {
     } catch (err) {
       res.status(401).send(`Error: ${err}`)
     }
-  })
+  }
 
-  module.exports = router
+module.exports = {index, register, login}
 
