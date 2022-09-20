@@ -1,21 +1,21 @@
 const db = require ('../dbConfig/init');
-const User = require('./User');
+
 
 class Habit {
-    constructor(data, user){
+    constructor(data){
         this.id = data.id;
         this.habit = data.habit_name;
-        this.dateComplete = data.data_complete;
+        this.dateComplete = data.date_complete;
         this.period = data.period;
         this.frequency = data.frequency;
-        // this.user = {user: user.user_name, path: `users/${data.user_id}`}
+        // this.user = {user: data.user_name, path: `users/${data.user_id}`}
 
     }
 
     static get all() {
         return new Promise (async (res, rej) => {
             try{
-                const habitsData = await db.query(`SELECT * FROM habits;`)
+                const habitsData = await db.query('SELECT * FROM habits;')
                 const habits = habitsData.rows.map(d => new Habit(d))
                 res(habits);
             } catch (err){
@@ -67,7 +67,7 @@ class Habit {
     delete() {
         return new Promise (async(res, rej) => {
             try{
-                await db.query(`DELETE FROM posts WHERE id = $1;`, [this.id]);
+                await db.query(`DELETE FROM habits WHERE id = $1;`, [this.id]);
                 res('Post was deleted')
             } catch (err){
                 rej(`Error deleting post: ${err}`)
@@ -76,4 +76,4 @@ class Habit {
     }
 }
 
-module.exports = Post;
+module.exports = Habit;
