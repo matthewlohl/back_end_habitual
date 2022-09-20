@@ -1,5 +1,5 @@
 const db = require ('../dbConfig/init');
-const User = require('./User');
+
 
 class Habit {
     constructor(data, user){
@@ -76,4 +76,4 @@ class Habit {
     }
 }
 
-module.exports = Post;
+module.exports = Habit;
