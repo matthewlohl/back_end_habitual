@@ -48,7 +48,7 @@ async function login (req, res) {
         console.log('Success')
 
         if (!!authed){
-            const payload = { username: user.username, email: user.email }
+            const payload = { username: user.user_name, email: user.email }
             const sendToken = (err, token) => {
                 if(err){ throw new Error('Error in token generation') }
                 res.status(200).json({
