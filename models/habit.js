@@ -5,7 +5,7 @@ class Habit {
     constructor(data){
         this.id = data.id;
         this.habit = data.habit_name;
-        this.dateComplete = data.data_complete;
+        this.dateComplete = data.date_complete;
         this.period = data.period;
         this.frequency = data.frequency;
         // this.user = {user: data.user_name, path: `users/${data.user_id}`}
