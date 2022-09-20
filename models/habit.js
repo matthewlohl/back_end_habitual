@@ -1,5 +1,5 @@
 const db = require ('../dbConfig/init');
-const User = require('./User');
+
 
 class Habit {
     constructor(data){
