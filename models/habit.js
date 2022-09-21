@@ -8,7 +8,7 @@ class Habit {
         this.dateComplete = data.date_complete
         this.period = data.period
         this.frequency = data.frequency
-        this.frequencyDone = data.frequency_done
+        this.frequency_done = data.frequency_done
         // this.user = {user: data.user_name, path: `users/${data.user_id}`}
 
     }
@@ -56,7 +56,7 @@ class Habit {
     patch() {
         return new Promise (async (res, rej) => {
             try{
-                let updatedHabitData = await db.query(`UPDATE habits SET frequencyDone = $1 WHERE id = $2 RETURNING *;`,[this.frequencyDone + 1, this.id]);
+                let updatedHabitData = await db.query(`UPDATE habits SET frequency_done = $1 WHERE id = $2 RETURNING *;`,[this.frequencyDone + 1, this.id]);
                 let updatedHabit = new Habit(updatedHabitData.rows[0])
 
                 res(updatedHabit);

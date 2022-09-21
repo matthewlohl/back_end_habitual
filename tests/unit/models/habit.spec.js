@@ -35,7 +35,7 @@ describe('Habit model', () => {
         expect(result).toBeInstanceOf(Book)
     })
 
-  describe('create', () => {
+  describe('Create', () => {
 
     test('Resolve with habits on successful db query', async () => {
 
@@ -64,4 +64,6 @@ describe('Habit model', () => {
     })
   })
 });
+
+
 })
