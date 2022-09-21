@@ -58,7 +58,6 @@ class Habit {
             try{
                 let updatedHabitData = await db.query(`UPDATE habits SET frequency_done = frequency_done + 1 WHERE id = $1;`,[id]);
                 let updatedHabit = new Habit(updatedHabitData.rows[0])
-
                 res(updatedHabit);
             }catch (err){
                 rej(`Error updating habit: ${err}`);
