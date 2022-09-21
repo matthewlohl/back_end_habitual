@@ -40,11 +40,11 @@ class Habit {
     }
 
 
-    static async create({habit, period, frequency}){
+    static async create({habit_name, period, frequency, dateComplete, frequencyDone}){
 
         return new Promise (async (res, rej) => {
             try{
-                let habitData =  await db.query(`INSERT INTO habits (habit_name, period, frequency) VALUES ($1, $2, $3) RETURNING *;`, [ habit, period, frequency ]);
+                let habitData =  await db.query(`INSERT INTO habits (habit_name, period, frequency, date_complete, frequency_done) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [ habit_name, period, frequency, dateComplete, frequencyDone ]);
                 res (habitData.rows[0]);
 
             } catch(err){
@@ -53,10 +53,10 @@ class Habit {
         })
     }
 
-    patch() {
+    patch(id) {
         return new Promise (async (res, rej) => {
             try{
-                let updatedHabitData = await db.query(`UPDATE habits SET frequency_done = $1 WHERE id = $2 RETURNING *;`,[this.frequencyDone + 1, this.id]);
+                let updatedHabitData = await db.query(`UPDATE habits SET frequency_done = frequency_done + 1 WHERE id = $1;`,[id]);
                 let updatedHabit = new Habit(updatedHabitData.rows[0])
 
                 res(updatedHabit);
