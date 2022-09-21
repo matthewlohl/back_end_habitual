@@ -9,4 +9,4 @@ function run(q, values, callback){
 
 module.exports = {run};
 
-// module.exports = pool;
+module.exports = pool;
