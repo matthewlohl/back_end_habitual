@@ -4,11 +4,11 @@ const db = require ('../dbConfig/init');
 class Habit {
     constructor(data){
         this.id = data.id;
-        this.habit = data.habit_name;
+        this.habit_name = data.habit_name;
         this.dateComplete = data.date_complete;
         this.period = data.period;
         this.frequency = data.frequency;
-        this.frequencyDone = data.frequencyDone
+        this.frequency_done = data.frequency_done
         // this.user = {user: data.user_name, path: `users/${data.user_id}`}
 
     }
