@@ -40,11 +40,11 @@ class Habit {
     }
 
 
-    static async create({habit, frequency}){
+    static async create({habit, period, frequency}){
 
         return new Promise (async (res, rej) => {
             try{
-                let habitData =  await db.query(`INSERT INTO habits (habit_name, frequency) VALUES ($1, $2) RETURNING *;`, [ habit, frequency ]);
+                let habitData =  await db.query(`INSERT INTO habits (habit_name, period, frequency) VALUES ($1, $2, $3) RETURNING *;`, [ habit, period, frequency ]);
                 res (habitData.rows[0]);
 
             } catch(err){
@@ -69,7 +69,7 @@ class Habit {
     delete() {
         return new Promise (async(res, rej) => {
             try{
-                await db.run(SQL `DELETE FROM habits WHERE id = $1;`, [this.id]);
+                await db.query('DELETE FROM habits WHERE id = $1;', [this.id]);
                 res('Habit was deleted')
             } catch (err){
                 rej(`Error deleting habit: ${err}`)
