@@ -1,6 +1,6 @@
 const {Pool} = require("pg")
 
-const pool = new Pool
+const pool = new Pool()
 
 function run(q, values, callback){
     return pool.query(q, values, callback);
@@ -9,3 +9,4 @@ function run(q, values, callback){
 
 module.exports = {run};
 
+// module.exports = pool;
