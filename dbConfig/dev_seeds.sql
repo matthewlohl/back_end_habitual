@@ -8,6 +8,7 @@ VALUES
     ('golf', '{20180529, 20191020, 20211225}', 4, 1, 0, 2);
 
 
+
 INSERT INTO users(user_name, email,password_digest)
 VALUES
     ('Matthew', 'matthew@example.com', '123123'),
