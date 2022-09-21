@@ -3,6 +3,7 @@ const SQL = require('sql-template-strings')
 
 class User {
     constructor (data){
+        this.id = data.id
         this.username = data.user_name
         this.email = data.email
         this.password_digest = data.password_digest
