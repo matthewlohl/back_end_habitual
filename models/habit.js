@@ -3,12 +3,12 @@ const SQL = require('sql-template-strings')
 
 class Habit {
     constructor(data){
-        this.id = data.id;
-        this.habit_name = data.habit_name;
-        this.dateComplete = data.date_complete;
-        this.period = data.period;
-        this.frequency = data.frequency;
-        this.frequencyDone = data.frequencyDone;
+        this.id = data.id
+        this.habit_name = data.habit_name
+        this.dateComplete = data.date_complete
+        this.period = data.period
+        this.frequency = data.frequency
+        this.frequencyDone = data.frequency_done
         // this.user = {user: data.user_name, path: `users/${data.user_id}`}
 
     }
