@@ -22,6 +22,16 @@ async function show (req, res) {
   }
 }
 
+async function getuserhabits (req, res){
+  try{
+    const userhabit = await Habit.findHabitsByUserId(parseInt(req.params.id));
+    res.status(200).json(userhabit)
+
+  } catch(err){
+    res.status(404).json({err})
+  }
+}
+
 async function create (req, res) {
 
   try {
@@ -66,4 +76,4 @@ async function patch (req, res) {
 }
 
 
-module.exports = {index, show, create, update, destroy, patch}
+module.exports = {index, show, getuserhabits, create, update, destroy, patch}
