@@ -8,7 +8,7 @@ class Habit {
         this.dateComplete = data.date_complete;
         this.period = data.period;
         this.frequency = data.frequency;
-        this.frequency_done = data.frequency_done
+        this.frequencyDone = data.frequencyDone;
         // this.user = {user: data.user_name, path: `users/${data.user_id}`}
 
     }
@@ -16,7 +16,7 @@ class Habit {
     static get all() {
         return new Promise (async (res, rej) => {
             try{
-                const habitsData = await db.run(SQL `SELECT * FROM habits;`)
+                const habitsData = await db.query(`SELECT * FROM habits;`)
                 const habits = habitsData.rows.map(d => new Habit(d))
                 res(habits);
             } catch (err){
@@ -29,7 +29,7 @@ class Habit {
         return new Promise (async(res, rej)=> {
             try{
 
-                let habitsData = await db.run(SQL `SELECT * FROM habits WHERE habits.id = $1;`, [id]);
+                let habitsData = await db.query(`SELECT * FROM habits WHERE habits.id = $1;`, [id]);
                 let habit = new Post(habitsData.rows[0])
 
                 res(habit);
@@ -44,7 +44,7 @@ class Habit {
 
         return new Promise (async (res, rej) => {
             try{
-                let habitData =  await db.run(SQL `INSERT INTO habits (habit_name, frequency) VALUES ($1, $2) RETURNING *;`, [ habit, frequency ]);
+                let habitData =  await db.query(`INSERT INTO habits (habit_name, frequency) VALUES ($1, $2) RETURNING *;`, [ habit, frequency ]);
                 res (habitData.rows[0]);
 
             } catch(err){
@@ -56,7 +56,7 @@ class Habit {
     patch() {
         return new Promise (async (res, rej) => {
             try{
-                let updatedHabitData = await db.run(SQL `UPDATE habits SET frequencyDone = $1 WHERE id = $2 RETURNING *;`,[this.frequencyDone + 1, this.id]);
+                let updatedHabitData = await db.query(`UPDATE habits SET frequencyDone = $1 WHERE id = $2 RETURNING *;`,[this.frequencyDone + 1, this.id]);
                 let updatedHabit = new Post(updatedHabitData.rows[0])
                 res(updatedHabit);
             }catch (err){
