@@ -67,13 +67,22 @@ async function destroy (req, res) {
 async function patch (req, res) {
 
   try{
-    const habit = await Habit.findById(parseInt(req.params.id));
-    const updateHabit = await habit.patch(habit)
-    res.status(200).json(updateHabit)
+    const ID = (parseInt(req.params.id))
+    const habit = await Habit.findById(ID);
+    console.log(Object.keys(req.body)[0])
+    if (Object.keys(req.body)[0] === "frequency_done"){
+      const updateHabit = await habit.patch(ID);
+      res.status(200).json(updateHabit)
+    }else{
+      const updateHabit = await habit.patch2(ID, req.body.date_complete)
+      res.status(200).json(updateHabit)
+    }
   } catch (err) {
     res.status(500).json({err})
   }
 }
 
 
+
 module.exports = {index, show, getuserhabits, create, update, destroy, patch}
+
