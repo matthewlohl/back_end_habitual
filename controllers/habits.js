@@ -57,7 +57,7 @@ async function destroy (req, res) {
 async function patch (req, res) {
 
   try{
-    const habit = await Habit.patch()
+    const habit = await Habit.patch(parseInt(req.params.id));
     res.status(200).json(habit)
   } catch (err) {
     res.status(500).json({err})
