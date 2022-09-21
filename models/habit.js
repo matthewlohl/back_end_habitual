@@ -20,7 +20,7 @@ class Habit {
                 const habits = habitsData.rows.map(d => new Habit(d))
                 res(habits);
             } catch (err){
-                rej (`Error retrieving posts: ${err}`)
+                rej (`Error retrieving habits: ${err}`)
             }
         })
     }
@@ -34,7 +34,7 @@ class Habit {
 
                 res(habit);
             }catch(err){
-                rej(`Error retrieving post with id ${id}- Error: ${err}`)
+                rej(`Error retrieving habits with id ${id}- Error: ${err}`)
             }
         })
     }
@@ -48,7 +48,7 @@ class Habit {
                 res (habitData.rows[0]);
 
             } catch(err){
-                reject(`Error creating post- Error:${err}`)
+                reject(`Error creating habit Error:${err}`)
             }
         })
     }
@@ -58,9 +58,10 @@ class Habit {
             try{
                 let updatedHabitData = await db.query(`UPDATE habits SET frequencyDone = $1 WHERE id = $2 RETURNING *;`,[this.frequencyDone + 1, this.id]);
                 let updatedHabit = new Post(updatedHabitData.rows[0])
+
                 res(updatedHabit);
             }catch (err){
-                rej(`Error updating post: ${err}`);
+                rej(`Error updating habit: ${err}`);
             }
         })
     }
@@ -69,9 +70,9 @@ class Habit {
         return new Promise (async(res, rej) => {
             try{
                 await db.run(SQL `DELETE FROM habits WHERE id = $1;`, [this.id]);
-                res('Post was deleted')
+                res('Habit was deleted')
             } catch (err){
-                rej(`Error deleting post: ${err}`)
+                rej(`Error deleting habit: ${err}`)
             }
         })
     }
