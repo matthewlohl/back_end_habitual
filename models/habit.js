@@ -30,7 +30,7 @@ class Habit {
             try{
 
                 let habitsData = await db.query(`SELECT * FROM habits WHERE habits.id = $1;`, [id]);
-                let habit = new Post(habitsData.rows[0])
+                let habit = new Habit(habitsData.rows[0])
 
                 res(habit);
             }catch(err){
