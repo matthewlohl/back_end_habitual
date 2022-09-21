@@ -38,13 +38,13 @@ async function login (req, res) {
         console.log('Running login function- line 36')
       const user = await User.findByEmail(req.body.email)
       console.log(user)
-      console.log(`request: ${req.body.email}`)
-      console.log(`request: ${req.body.password}`)
-      console.log(user.password_digest)
+      // console.log(`request: ${req.body.email}`)
+      // console.log(`request: ${req.body.password}`)
+      // console.log(user.password_digest)
       if (user == null) {
         return res.status(400).send('Cannot find user')
       } else if(await bcrypt.compare(req.body.password, user.password_digest)) {
-        res.status(200).json({user: user.email})
+        res.status(200).json({email: user.email, id: user.id, username: user.username})
         console.log('Success')
 
         if (!!authed){
@@ -67,6 +67,16 @@ async function login (req, res) {
       res.status(401).send(`Error: ${err}`)
     }
   }
+
+// async function register (req, res) {
+//     try {
+//       console.log('finding user by id - line 73')
+//       const user = await User.findByEmail(req.body.email)
+//       console.log(user)
+//       console.log(`request: ${req.body.email}`)
+//       console.log(`request: ${req.body.password}`)
+//       console.log(user.password_digest)
+// }
 
 module.exports = {index, register, login}
 
