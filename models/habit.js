@@ -69,7 +69,7 @@ class Habit {
     delete() {
         return new Promise (async(res, rej) => {
             try{
-                await db.run(SQL `DELETE FROM habits WHERE id = $1;`, [this.id]);
+                await db.query('DELETE FROM habits WHERE id = $1;', [this.id]);
                 res('Habit was deleted')
             } catch (err){
                 rej(`Error deleting habit: ${err}`)
