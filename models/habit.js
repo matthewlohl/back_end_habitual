@@ -8,7 +8,7 @@ class Habit {
         this.dateComplete = data.date_complete;
         this.period = data.period;
         this.frequency = data.frequency;
-        this.frequency_done = data.frequency_done
+        this.frequencyDone = data.frequencyDone;
         // this.user = {user: data.user_name, path: `users/${data.user_id}`}
 
     }
