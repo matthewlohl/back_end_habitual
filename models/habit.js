@@ -1,11 +1,12 @@
 const db = require ('../dbConfig/init');
-const SQL = require('sql-template-strings')
+const SQL = require('sql-template-strings');
+const { patch } = require('../controllers/habits');
 
 class Habit {
     constructor(data){
         this.id = data.id
         this.habit_name = data.habit_name
-        this.dateComplete = data.date_complete
+        this.date_complete = data.date_complete
         this.period = data.period
         this.frequency = data.frequency
         this.frequency_done = data.frequency_done
@@ -40,15 +41,15 @@ class Habit {
     }
 
 
-    static async create({habit_name, period, frequency, dateComplete, frequencyDone}){
+    static async create({habit_name, period, frequency, date_complete, frequency_done}){
 
         return new Promise (async (res, rej) => {
             try{
-                let habitData =  await db.query(`INSERT INTO habits (habit_name, period, frequency, date_complete, frequency_done) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [ habit_name, period, frequency, dateComplete, frequencyDone ]);
+                let habitData =  await db.query(`INSERT INTO habits (habit_name, period, frequency, date_complete, frequency_done) VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [ habit_name, period, frequency, date_complete, frequency_done ]);
                 res (habitData.rows[0]);
 
             } catch(err){
-                reject(`Error creating habit Error:${err}`)
+                rej(`Error creating habit Error:${err}`)
             }
         })
     }
@@ -76,6 +77,22 @@ class Habit {
             }
         })
     }
+
+
+    patch2(id, completion) {
+        return new Promise (async (res, rej) => {
+            try{
+                let updatedHabitData = await db.query(`UPDATE habits SET date_complete = array_append(date_complete, $1)  WHERE id = $2;`,[completion, id]);
+                let updatedHabit = new Habit(updatedHabitData.rows[0])
+
+                res(updatedHabit);
+            }catch (err){
+                rej(`Error updating habit: ${err}`);
+            }
+        })
+    }
 }
+    
+
 
 module.exports = Habit;
