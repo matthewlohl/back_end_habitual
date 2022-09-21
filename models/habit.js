@@ -9,7 +9,7 @@ class Habit {
         this.period = data.period
         this.frequency = data.frequency
         this.frequency_done = data.frequency_done
-        // this.user = {user: data.user_name, path: `users/${data.user_id}`}
+        this.userid = {user: data.user_name, path: `users/${data.user_id}`}
 
     }
 
@@ -35,6 +35,19 @@ class Habit {
                 res(habit);
             }catch(err){
                 rej(`Error retrieving habits with id ${id}- Error: ${err}`)
+            }
+        })
+    }
+
+    static findHabitsByUserId (userid){
+        return new Promise (async(res, rej) => {
+            try{
+                console.log(`Finding habits from user ${userid}`)
+                let userHabits = await db.query(`SELECT * FROM habits WHERE user_id = $1;`, [userid]);
+                const habits = userHabits.rows.map(d => new Habit(d))
+                res(habits);
+            } catch(err){
+                rej(`Error retrieving habits from userid ${userid}- Error: ${err}`)
             }
         })
     }
