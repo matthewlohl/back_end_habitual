@@ -82,11 +82,13 @@ class Habit {
     }
 
 
-    static async create({habit_name, period, frequency, frequency_done}){
+    static async create({habit_name, period, frequency, frequency_done, userid}){
 
         return new Promise (async (res, rej) => {
             try{
-                let habitData =  await db.query(`INSERT INTO habits (habit_name, period, frequency, date_complete, frequency_done) VALUES ($1, $2, $3, CURRENT_DATE, $4) RETURNING *;`, [ habit_name, period, frequency, frequency_done ]);
+                let habitData =  await db.query(`INSERT INTO habits (habit_name, period, frequency, date_complete, frequency_done, user_id) VALUES ($1, $2, $3, CURRENT_DATE, $4, $5) RETURNING *;`, [ habit_name, period, frequency, frequency_done, userid]);
+                console.log(`${userid} - line 62`)
+
                 res (habitData.rows[0]);
 
             } catch(err){
