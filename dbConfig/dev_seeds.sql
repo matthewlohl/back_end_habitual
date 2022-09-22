@@ -1,11 +1,12 @@
-INSERT INTO habits(habit_name, date_complete, period, frequency, frequency_done, user_id)
+INSERT INTO habits(habit_name, date_complete, period, frequency, frequency_done, streak, user_id)
 VALUES
-    ('drink water', '{20220101, 20220102, 20220103}', 1, 5, 0, 4),
-    ('gym', '{20220105, 20220107, 20220108}', 1, 3, 0, 3),
-    ('basketball', '{20220211, 20220312, 20220320}', 2, 2, 0, 3),
-    ('football', '{20190511, 20191203, 20200120}', 1, 3, 0, 1),
-    ('swimming', '{20180529, 20191020, 20211225}', 1, 3, 0, 1),
-    ('golf', '{20180529, 20191020, 20211225}', 4, 1, 0, 2);
+
+    ('drink water', '1998-04-16', 1, 5, 2, NULL , 4),
+    ('gym', '1998-04-16', 1, 3, 1 ,NULL , 3),
+    ('basketball', '1998-04-16', 2, 2, 2, NULL , 3),
+    ('football', '2022-09-22', 1, 3, 3,NULL , 1),
+    ('swimming', '1998-04-16', 1, 3, 0,NULL , 1),
+    ('golf', '1998-04-16', 4, 1, 0,NULL , 2);
 
 
 
