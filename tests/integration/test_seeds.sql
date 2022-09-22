@@ -25,17 +25,3 @@ VALUES
     ('test user2', 'liam@example.com', 'jkljkl'),
     ('test user3', 'cami@example.com', 'asdasd');
 
--- INSERT INTO users(user_name, email,password_digest)
--- VALUES
---     ('Matthew', 
---     'matthew@example.com', 
---     '123123'),
---     ('Bradley', 
---     'bradley@example.com', 
---     'abcabc'),
---     ('Liam', 
---     'liam@example.com', 
---     'jkljkl'),
---     ('Cami', 
---     'cami@example.com', 
---     'asdasd');

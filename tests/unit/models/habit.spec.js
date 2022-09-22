@@ -1,5 +1,3 @@
-const Book = require ('../../../models/habit')
-
 const pg = require ('pg');
 
 jest.mock('pg');
@@ -32,7 +30,7 @@ describe('Habit model', () => {
             .mockResolvedValueOnce({rows: [{habitData}] });
         const result = await Habit.findById(2);
         
-        expect(result).toBeInstanceOf(Book)
+        expect(result).toBeInstanceOf(Habit)
     })
 
   describe('Create', () => {
