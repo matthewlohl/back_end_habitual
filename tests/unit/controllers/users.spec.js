@@ -15,12 +15,35 @@ describe ('Users Controller', () => {
 
       test('Returns Users with 200 status code', async () => {
         jest.spyOn(User, 'all', 'get')
-          .mockResolvedValue('matt');
+          .mockResolvedValue(['matt']);
         await usersController.index(null, mockRes);
         
 
-        expect(mockJson).toHaveBeenCalledWith(['matt'])
+        expect(mockJson).toHaveBeenCalledWith({'users': ['matt']})
       })
     })
   
 })
+
+
+// "users": [
+//   {
+//     "id": 1,
+//     "username": "Matthew",
+//     "email": "matthew@example.com",
+//     "password_digest": "123123"
+//   }
+// ]
+
+// {
+//   "id": 1,
+//   "habit_name": "drink water",
+//   "date_complete": [
+//     20220101,
+//     20220102,
+//     20220103
+//   ],
+//   "period": 1,
+//   "frequency": 5,
+//   "frequency_done": 0
+// }

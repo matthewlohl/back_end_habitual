@@ -14,7 +14,7 @@ async function index (req,res) {
     try{
         console.log('getting users - line 15')
         const users = await User.all
-        res.json({users})
+        res.status(200).json({users})
     } catch (err){
         res.status(500).json({err})
     }
