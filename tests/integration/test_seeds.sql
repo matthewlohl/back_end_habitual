@@ -1,4 +1,4 @@
-TRUNCATE habits RESTART IDENTITY;
+TRUNCATE habits, users RESTART IDENTITY;
 
 INSERT INTO habits(habit_name, date_complete, period, frequency, frequency_done)
 VALUES
@@ -17,6 +17,13 @@ VALUES
     2, 
     2, 
     0);
+
+
+INSERT INTO users(user_name)
+VALUES
+    ('test user1', 'bradley@example.com', 'abcabc'),
+    ('test user2', 'liam@example.com', 'jkljkl'),
+    ('test user3', 'cami@example.com', 'asdasd');
 
 -- INSERT INTO users(user_name, email,password_digest)
 -- VALUES
