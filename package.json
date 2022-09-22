@@ -11,7 +11,7 @@
     "seedDev": "node dbConfig/seedDev.js",
     "start": "node index.js",
     "test": "jest --setupFiles ./tests/integration/config.js --watchAll --detectOpenHandles --runInBand --verbose",
-    "unitTests": "jest ./tests/integration/config.js --testPathPattern=/unit/ --watchAll --verbose",
+    "unitTests": "jest --testPathPattern=/unit/ --watchAll --verbose",
     "coverage": "jest --testPathPattern=/unit/ --coverage"
   },
   "jest": {
