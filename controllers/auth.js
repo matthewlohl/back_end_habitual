@@ -47,22 +47,22 @@ async function login (req, res) {
         res.status(200).json({email: user.email, id: user.id, username: user.username})
         console.log('Success')
 
-        if (!!authed){
-            const payload = { username: user.user_name, email: user.email }
-            const sendToken = (err, token) => {
-                if(err){ throw new Error('Error in token generation') }
-                res.status(200).json({
-                    success: true,
-                    token: "Bearer " + token,
-                });
-        }
-        jwt.sign(payload, process.env.SECRET, { expiresIn: 120}, sendToken);
+        // if (!!authed){
+        //     const payload = { username: user.user_name, email: user.email }
+        //     const sendToken = (err, token) => {
+        //         if(err){ throw new Error('Error in token generation') }
+        //         res.status(200).json({
+        //             success: true,
+        //             token: "Bearer " + token,
+        //         });
+        // }
+        // jwt.sign(payload, process.env.SECRET, { expiresIn: 120}, sendToken);
 
       } else {
         res.send('Not Allowed')
         console.log('Not Allowed')
       }
-    }
+    
     } catch (err) {
       res.status(401).send(`Error: ${err}`)
     }

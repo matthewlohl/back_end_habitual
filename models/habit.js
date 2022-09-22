@@ -26,7 +26,7 @@ class Habit {
                 console.log((currentDate.rows).some(el => el.difference >= 1))
                 if ((currentDate.rows).some(el => el.difference >= 1 && el.period == 1)){
 
-                    await db.query(`UPDATE habits SET frequency_done = 0, date_complete = CURRENT_DATE WHERE period = 1;`)
+                    await db.query(`UPDATE habits SET frequency_done = 0, date_complete = CURRENT_DATE WHERE period = 1;`);
                     const habitsData = await db.query(`SELECT * FROM habits;`);
                     const habits = habitsData.rows.map(d => new Habit(d));
                     res(habits);
