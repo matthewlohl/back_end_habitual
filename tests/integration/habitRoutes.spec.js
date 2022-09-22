@@ -13,10 +13,10 @@ describe('habits endpoints', () => {
   afterAll( async () => {
     console.log('Gracefully stopping test server')
     await api.close()
-  })
+  });
 
   it('should return a list of all habits', async () => {
     const res = await request(api).get('/habits')
-    expect(res.body.toHaveLength(3))
+    expect(res.body).toHaveLength(3)
   })
 })
