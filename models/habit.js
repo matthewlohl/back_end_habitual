@@ -19,26 +19,26 @@ class Habit {
         return new Promise (async (res, rej) => {
             try{
                 // check month then week then day - 
-                const currentDate = await db.query(`SELECT period,CURRENT_DATE::date - date_complete::date AS difference FROM habits;`)
-                const currentDate2 = await db.query('SELECT EXTRACT(WEEK FROM CURRENT_DATE::date) - EXTRACT(WEEK FROM date_complete::date) AS difference FROM habits;')
-                const currentDate3 = await db.query('SELECT EXTRACT(MONTH FROM CURRENT_DATE::date) - EXTRACT(MONTH FROM date_complete::date) AS difference FROM habits;')
+                const currentDate = await db.query(`SELECT period AS period, CURRENT_DATE::date - date_complete::date AS difference FROM habits;`)
+                const currentDate2 = await db.query('SELECT period AS period,EXTRACT(WEEK FROM CURRENT_DATE::date) - EXTRACT(WEEK FROM date_complete::date) AS difference FROM habits;')
+                const currentDate3 = await db.query('SELECT period AS period,EXTRACT(MONTH FROM CURRENT_DATE::date) - EXTRACT(MONTH FROM date_complete::date) AS difference FROM habits;')
                 console.log(currentDate2.rows)
                 console.log((currentDate.rows).some(el => el.difference >= 1))
                 if ((currentDate.rows).some(el => el.difference >= 1 && el.period == 1)){
 
-                    await db.query(`UPDATE habits SET frequency_done = 0, date_complete = CURRENT_DATE WHERE period = 0;`)
+                    await db.query(`UPDATE habits SET frequency_done = 0, date_complete = CURRENT_DATE WHERE period = 1;`)
                     const habitsData = await db.query(`SELECT * FROM habits;`);
                     const habits = habitsData.rows.map(d => new Habit(d));
                     res(habits);
                 }else if ((currentDate2.rows).some(el => el.difference >= 1 && el.period == 2)){
 
-                    await db.query(`UPDATE habits SET frequency_done = 0, date_complete = CURRENT_DATE WHERE period = 1;`);
+                    await db.query(`UPDATE habits SET frequency_done = 0, date_complete = CURRENT_DATE WHERE period = 2;`);
                     const habitsData = await db.query(`SELECT * FROM habits;`);
                     const habits = habitsData.rows.map(d => new Habit(d));
                     res(habits);
                 }else if ((currentDate3.rows).some(el => el.difference >= 1 && el.period == 3)){
 
-                    await db.query(`UPDATE habits SET frequency_done = 0, date_complete = CURRENT_DATE WHERE period = 2;`);
+                    await db.query(`UPDATE habits SET frequency_done = 0, date_complete = CURRENT_DATE WHERE period = 3;`);
                     const habitsData = await db.query(`SELECT * FROM habits;`);
                     const habits = habitsData.rows.map(d => new Habit(d));
                     res(habits);
